@@ -19,4 +19,4 @@ void main() {
   runApp(const AppConfig());
 }
 
-// update 1.2
+// update 2.0
