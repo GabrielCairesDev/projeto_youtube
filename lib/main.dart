@@ -18,3 +18,5 @@ void main() {
   // não muda depois de criado — isso ajuda na performance.
   runApp(const AppConfig());
 }
+
+// update 1.1
