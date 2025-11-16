@@ -42,10 +42,16 @@ class RegisterPage extends StatelessWidget {
               hintText: 'Confirme a sua senha',
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
-                 return ValidatorUtils.confirmPass(value, controller.passController.text);
+                return ValidatorUtils.confirmPass(
+                  value,
+                  controller.passController.text,
+                );
               },
             ),
-            ButtonWidget(text: 'Registrar', onTap: controller.onTapRegister),
+            ButtonWidget(
+              text: 'Registrar',
+              onTap: () => controller.onTapRegister(context),
+            ),
           ],
         ),
       ),

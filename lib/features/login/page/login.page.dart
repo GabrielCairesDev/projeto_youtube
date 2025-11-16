@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
           spacing: 16,
           children: [
             TextFormFieldWidget(
-              controller: controller.emailController ,
+              controller: controller.emailController,
               labelText: 'E-mail',
               hintText: 'Digite o seu e-mail',
             ),
@@ -31,7 +31,13 @@ class LoginPage extends StatelessWidget {
             ButtonWidget(
               text: 'Login',
               onTap: () {
-                controller.onTapButton();
+                controller.onTapButtonLogin();
+              },
+            ),
+            ButtonWidget(
+              text: 'Registrar',
+              onTap: () {
+                controller.onTapButtonRegister(context);
               },
             ),
           ],

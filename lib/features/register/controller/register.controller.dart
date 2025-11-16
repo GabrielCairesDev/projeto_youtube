@@ -5,10 +5,11 @@ class RegisterController {
   final passController = TextEditingController();
   final confirmPassController = TextEditingController();
 
-  void onTapRegister(){
+  void onTapRegister(BuildContext context) {
     debugPrint('---> Clicou no botão registrar');
     debugPrint('---> email: ${emailController.text}');
     debugPrint('---> senha: ${passController.text}');
     debugPrint('---> senha 2: ${confirmPassController.text}');
+    Navigator.pop(context);
   }
 }
