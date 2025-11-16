@@ -2,10 +2,7 @@
 // widgets visuais (como Text, Button, AppBar, Scaffold, etc.)
 // e o design padrão do Android chamado "Material Design".
 import 'package:flutter/material.dart';
-
-// Importa o arquivo onde está a classe "HomePage".
-// Essa classe representa a tela inicial (página principal) do app.
-import 'package:projeto_youtube/features/register/page/register.page.dart';
+import 'package:projeto_youtube/core/routes/routes.config.dart';
 
 // Define uma nova classe chamada "AppConfig".
 // Essa classe é um widget do tipo "StatelessWidget",
@@ -28,9 +25,8 @@ class AppConfig extends StatelessWidget {
       // como na lista de apps abertos no Android).
       title: 'Projeto YouTube',
 
-      // Define qual será a primeira tela exibida ao abrir o app.
-      // Aqui é a classe "HomePage", que está sendo importada lá em cima.
-      home: const RegisterPage(),
+      initialRoute: RoutesConfig.login,
+      routes: RoutesConfig.routes(),
     );
   }
 }
