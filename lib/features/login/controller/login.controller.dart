@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:projeto_youtube/core/routes/routes.config.dart';
 
 class LoginController {
-  final emailController = TextEditingController();
-  final passController = TextEditingController();
+  final emailController = TextEditingController(text: 'gabriel@exemplo.com');
+  final passController = TextEditingController(text: '123456');
 
   void onTapButtonLogin(BuildContext context) {
     debugPrint('clicou no botao de login');
