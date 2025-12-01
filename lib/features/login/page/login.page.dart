@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
             ButtonWidget(
               text: 'Login',
               onTap: () {
-                controller.onTapButtonLogin();
+                controller.onTapButtonLogin(context);
               },
             ),
             ButtonWidget(

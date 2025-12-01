@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_youtube/features/home/page/home.page.dart';
 import 'package:projeto_youtube/features/login/page/login.page.dart';
 import 'package:projeto_youtube/features/register/page/register.page.dart';
 
@@ -11,7 +12,7 @@ class RoutesConfig {
     return {
       login: (context) => const LoginPage(),
       register: (context) => const RegisterPage(),
-      // home: (context) => const HomePage(),
+      home: (context) => const HomePage(),
     };
   }
 }
