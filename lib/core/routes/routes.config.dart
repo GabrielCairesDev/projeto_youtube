@@ -10,9 +10,9 @@ class RoutesConfig {
 
   static Map<String, WidgetBuilder> routes() {
     return {
-      login: (context) => const LoginPage(),
-      register: (context) => const RegisterPage(),
-      home: (context) => const HomePage(),
+      login: (context) => LoginPage(),
+      register: (context) => RegisterPage(),
+      home: (context) => HomePage(),
     };
   }
 }

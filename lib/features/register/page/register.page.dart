@@ -5,11 +5,12 @@ import 'package:projeto_youtube/shared/widgets/button.widget.dart';
 import 'package:projeto_youtube/shared/widgets/text_form_field.widget.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+
+  final _controller = RegisterController();
 
   @override
   Widget build(BuildContext context) {
-    final controller = RegisterController();
     return Scaffold(
       appBar: AppBar(title: Text('Pagina de Registro')),
       body: Padding(
@@ -19,7 +20,7 @@ class RegisterPage extends StatelessWidget {
           spacing: 16,
           children: [
             TextFormFieldWidget(
-              controller: controller.emailController,
+              controller: _controller.emailController,
               labelText: 'E-mail',
               hintText: 'Digite o seu e-mail',
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -28,7 +29,7 @@ class RegisterPage extends StatelessWidget {
               },
             ),
             TextFormFieldWidget(
-              controller: controller.passController,
+              controller: _controller.passController,
               labelText: 'Senha',
               hintText: 'Digite sua senha',
               autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -37,20 +38,20 @@ class RegisterPage extends StatelessWidget {
               },
             ),
             TextFormFieldWidget(
-              controller: controller.confirmPassController,
+              controller: _controller.confirmPassController,
               labelText: 'Confirmar Senha',
               hintText: 'Confirme a sua senha',
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
                 return ValidatorUtils.confirmPass(
                   value,
-                  controller.passController.text,
+                  _controller.passController.text,
                 );
               },
             ),
             ButtonWidget(
               text: 'Registrar',
-              onTap: () => controller.onTapRegister(context),
+              onTap: () => _controller.onTapRegister(context),
             ),
           ],
         ),

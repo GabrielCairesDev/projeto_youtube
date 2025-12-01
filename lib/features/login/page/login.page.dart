@@ -4,12 +4,12 @@ import 'package:projeto_youtube/shared/widgets/button.widget.dart';
 import 'package:projeto_youtube/shared/widgets/text_form_field.widget.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final _controller = LoginController();
 
   @override
   Widget build(BuildContext context) {
-    final controller = LoginController();
-
     return Scaffold(
       appBar: AppBar(title: Text('Página de Login')),
       body: Padding(
@@ -19,12 +19,12 @@ class LoginPage extends StatelessWidget {
           spacing: 16,
           children: [
             TextFormFieldWidget(
-              controller: controller.emailController,
+              controller: _controller.emailController,
               labelText: 'E-mail',
               hintText: 'Digite o seu e-mail',
             ),
             TextFormFieldWidget(
-              controller: controller.passController,
+              controller: _controller.passController,
               labelText: 'Senha',
               hintText: 'Digite a sua senha',
               obscureText: true,
@@ -32,13 +32,13 @@ class LoginPage extends StatelessWidget {
             ButtonWidget(
               text: 'Login',
               onTap: () {
-                controller.onTapButtonLogin(context);
+                _controller.onTapButtonLogin(context);
               },
             ),
             ButtonWidget(
               text: 'Registrar',
               onTap: () {
-                controller.onTapButtonRegister(context);
+                _controller.onTapButtonRegister(context);
               },
             ),
           ],
