@@ -27,6 +27,7 @@ class LoginPage extends StatelessWidget {
               controller: controller.passController,
               labelText: 'Senha',
               hintText: 'Digite a sua senha',
+              obscureText: true,
             ),
             ButtonWidget(
               text: 'Login',

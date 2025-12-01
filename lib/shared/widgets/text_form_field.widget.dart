@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextFormFieldWidget extends StatelessWidget {
+class TextFormFieldWidget extends StatefulWidget {
   const TextFormFieldWidget({
     super.key,
     required this.labelText,
@@ -8,6 +8,7 @@ class TextFormFieldWidget extends StatelessWidget {
     required this.controller,
     this.autovalidateMode,
     this.validator,
+    this.obscureText = false,
   });
 
   final String labelText;
@@ -15,18 +16,41 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final AutovalidateMode? autovalidateMode;
   final String? Function(String?)? validator;
+  final bool obscureText;
+
+  @override
+  State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
+}
+
+class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
+  bool _obscureText = false;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      autovalidateMode: autovalidateMode,
-      validator: validator,
+      controller: widget.controller,
+      autovalidateMode: widget.autovalidateMode,
+      validator: widget.validator,
+      obscureText: _obscureText,
       decoration: InputDecoration(
-        labelText: labelText,
-        hintText: hintText,
+        suffixIcon: widget.obscureText
+            ? InkWell(
+                onTap: onTapObscureText,
+                child: _obscureText
+                    ? Icon(Icons.visibility)
+                    : Icon(Icons.visibility_off),
+              )
+            : null,
+        labelText: widget.labelText,
+        hintText: widget.hintText,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
+  }
+
+  void onTapObscureText() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
   }
 }
