@@ -36,56 +36,59 @@ class _RegisterPageState extends State<RegisterPage> {
         return ScaffoldWidget(
           title: 'Pagina de Registro',
           isLoading: controller.isLoading,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 16,
-            children: [
-              TextFormFieldWidget(
-                controller: controller.emailController,
-                labelText: 'E-mail',
-                hintText: 'Digite o seu e-mail',
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) {
-                  return ValidatorUtils.email(value);
-                },
-              ),
-              TextFormFieldWidget(
-                controller: controller.passController,
-                labelText: 'Senha',
-                hintText: 'Digite sua senha',
-                obscureText: true,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) {
-                  return ValidatorUtils.pass(value);
-                },
-              ),
-              TextFormFieldWidget(
-                controller: controller.confirmPassController,
-                labelText: 'Confirmar Senha',
-                hintText: 'Confirme a sua senha',
-                obscureText: true,
+          body: Form(
+            key: controller.formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              spacing: 16,
+              children: [
+                TextFormFieldWidget(
+                  controller: controller.emailController,
+                  labelText: 'E-mail',
+                  hintText: 'Digite o seu e-mail',
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    return ValidatorUtils.email(value);
+                  },
+                ),
+                TextFormFieldWidget(
+                  controller: controller.passController,
+                  labelText: 'Senha',
+                  hintText: 'Digite sua senha',
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    return ValidatorUtils.pass(value);
+                  },
+                ),
+                TextFormFieldWidget(
+                  controller: controller.confirmPassController,
+                  labelText: 'Confirmar Senha',
+                  hintText: 'Confirme a sua senha',
+                  obscureText: true,
 
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) {
-                  return ValidatorUtils.confirmPass(
-                    value,
-                    controller.passController.text,
-                  );
-                },
-              ),
-              ButtonWidget(
-                text: 'Registrar',
-                onTap: () async {
-                  final result = await controller.onTapRegister();
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) {
+                    return ValidatorUtils.confirmPass(
+                      value,
+                      controller.passController.text,
+                    );
+                  },
+                ),
+                ButtonWidget(
+                  text: 'Registrar',
+                  onTap: () async {
+                    final result = await controller.onTapRegister();
 
-                  SnackBarWidget.show(context, result: result);
+                    SnackBarWidget.show(context, result: result);
 
-                  if (result.success) {
-                    Navigator.pop(context);
-                  }
-                },
-              ),
-            ],
+                    if (result.success) {
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         );
       },

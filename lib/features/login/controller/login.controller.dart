@@ -3,12 +3,17 @@ import 'package:projeto_youtube/core/routes/routes.config.dart';
 import 'package:projeto_youtube/shared/models/result.model.dart';
 
 class LoginController extends ChangeNotifier {
+  final formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController(text: 'gabriel@exemplo.com');
   final passController = TextEditingController(text: '123456');
 
   bool isLoading = false;
 
   Future<ResultModel> onTapButtonLogin() async {
+    if (!formKey.currentState!.validate()) {
+      return ResultModel(false, 'Por favor, corrija os erros no formulário.');
+    }
     isLoading = true;
     notifyListeners();
 
@@ -20,7 +25,7 @@ class LoginController extends ChangeNotifier {
 
     late ResultModel result;
 
-    if (emailController.text == 'gabriel@exemplo.com' ||
+    if (emailController.text == 'gabriel@exemplo.com' &&
         passController.text == '123456') {
       result = ResultModel(true, 'Login realizado com sucesso');
       debugPrint('E-mail e senha corretos');

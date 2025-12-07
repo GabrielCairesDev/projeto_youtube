@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:projeto_youtube/shared/models/result.model.dart';
 
 class RegisterController extends ChangeNotifier {
+  final formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final confirmPassController = TextEditingController();
@@ -9,6 +11,9 @@ class RegisterController extends ChangeNotifier {
   bool isLoading = false;
 
   Future<ResultModel> onTapRegister() async {
+    if (!formKey.currentState!.validate()) {
+      return ResultModel(false, 'Por favor, corrija os erros no formulário.');
+    }
     isLoading = true;
     notifyListeners();
 
