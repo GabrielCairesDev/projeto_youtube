@@ -8,7 +8,7 @@ class TextFormFieldWidget extends StatefulWidget {
     required this.controller,
     this.autovalidateMode,
     this.validator,
-    this.obscureText = false,
+    this.obscureText,
   });
 
   final String labelText;
@@ -16,14 +16,20 @@ class TextFormFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   final AutovalidateMode? autovalidateMode;
   final String? Function(String?)? validator;
-  final bool obscureText;
+  final bool? obscureText;
 
   @override
   State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
 }
 
 class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
-  bool _obscureText = false;
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.obscureText ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +37,14 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
       controller: widget.controller,
       autovalidateMode: widget.autovalidateMode,
       validator: widget.validator,
-      obscureText: _obscureText,
+      obscureText: widget.obscureText == true ? _obscureText : false,
       decoration: InputDecoration(
-        suffixIcon: widget.obscureText
+        suffixIcon: widget.obscureText == true
             ? InkWell(
                 onTap: onTapObscureText,
-                child: _obscureText
-                    ? Icon(Icons.visibility)
-                    : Icon(Icons.visibility_off),
+                child: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                ),
               )
             : null,
         labelText: widget.labelText,
