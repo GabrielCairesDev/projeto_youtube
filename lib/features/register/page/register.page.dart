@@ -3,6 +3,7 @@ import 'package:projeto_youtube/features/register/controller/register.controller
 import 'package:projeto_youtube/shared/utils/validator.utils.dart';
 import 'package:projeto_youtube/shared/widgets/button.widget.dart';
 import 'package:projeto_youtube/shared/widgets/scaffold.widget.dart';
+import 'package:projeto_youtube/shared/widgets/snack_bar.widget.dart';
 import 'package:projeto_youtube/shared/widgets/text_form_field.widget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -52,6 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: controller.passController,
                 labelText: 'Senha',
                 hintText: 'Digite sua senha',
+                obscureText: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   return ValidatorUtils.pass(value);
@@ -61,6 +63,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: controller.confirmPassController,
                 labelText: 'Confirmar Senha',
                 hintText: 'Confirme a sua senha',
+                obscureText: true,
+
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   return ValidatorUtils.confirmPass(
@@ -71,7 +75,15 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               ButtonWidget(
                 text: 'Registrar',
-                onTap: () => controller.onTapRegister(context),
+                onTap: () async {
+                  final result = await controller.onTapRegister();
+
+                  SnackBarWidget.show(context, result: result);
+
+                  if (result.success) {
+                    Navigator.pop(context);
+                  }
+                },
               ),
             ],
           ),

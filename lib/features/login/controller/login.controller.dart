@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_youtube/core/routes/routes.config.dart';
+import 'package:projeto_youtube/shared/models/result.model.dart';
 
 class LoginController extends ChangeNotifier {
   final emailController = TextEditingController(text: 'gabriel@exemplo.com');
@@ -7,7 +8,7 @@ class LoginController extends ChangeNotifier {
 
   bool isLoading = false;
 
-  Future<void> onTapButtonLogin(BuildContext context) async {
+  Future<ResultModel> onTapButtonLogin() async {
     isLoading = true;
     notifyListeners();
 
@@ -17,16 +18,21 @@ class LoginController extends ChangeNotifier {
     debugPrint('E-mail: ${emailController.text}');
     debugPrint('Senha: ${passController.text}');
 
+    late ResultModel result;
+
     if (emailController.text == 'gabriel@exemplo.com' ||
         passController.text == '123456') {
+      result = ResultModel(true, 'Login realizado com sucesso');
       debugPrint('E-mail e senha corretos');
-      Navigator.pushReplacementNamed(context, RoutesConfig.home);
     } else {
       debugPrint('E-mail e senha errados');
+      result = ResultModel(false, 'E-mail ou senha incorretos');
     }
 
     isLoading = false;
     notifyListeners();
+
+    return result;
   }
 
   void onTapButtonRegister(BuildContext context) {

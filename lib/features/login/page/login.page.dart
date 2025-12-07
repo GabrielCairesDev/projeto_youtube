@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_youtube/core/routes/routes.config.dart';
 import 'package:projeto_youtube/features/login/controller/login.controller.dart';
 import 'package:projeto_youtube/shared/widgets/button.widget.dart';
 import 'package:projeto_youtube/shared/widgets/scaffold.widget.dart';
+import 'package:projeto_youtube/shared/widgets/snack_bar.widget.dart';
 import 'package:projeto_youtube/shared/widgets/text_form_field.widget.dart';
 
 class LoginPage extends StatefulWidget {
@@ -51,8 +53,14 @@ class _LoginPageState extends State<LoginPage> {
               ),
               ButtonWidget(
                 text: 'Login',
-                onTap: () {
-                  controller.onTapButtonLogin(context);
+                onTap: () async {
+                  final result = await controller.onTapButtonLogin();
+
+                  SnackBarWidget.show(context, result: result);
+
+                  if (result.success) {
+                    Navigator.pushReplacementNamed(context, RoutesConfig.home);
+                  }
                 },
               ),
               ButtonWidget(
