@@ -4,30 +4,47 @@ import 'package:projeto_youtube/shared/widgets/button.widget.dart';
 import 'package:projeto_youtube/shared/widgets/scaffold.widget.dart';
 import 'package:projeto_youtube/shared/widgets/text_form_field.widget.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
-  final _controller = LoginController();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late final LoginController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = LoginController();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: _controller,
+      listenable: controller,
       builder: (context, _) {
         return ScaffoldWidget(
           title: 'Página de Login',
-          isLoading: _controller.isLoading,
+          isLoading: controller.isLoading,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 16,
             children: [
               TextFormFieldWidget(
-                controller: _controller.emailController,
+                controller: controller.emailController,
                 labelText: 'E-mail',
                 hintText: 'Digite o seu e-mail',
               ),
               TextFormFieldWidget(
-                controller: _controller.passController,
+                controller: controller.passController,
                 labelText: 'Senha',
                 hintText: 'Digite a sua senha',
                 obscureText: true,
@@ -35,13 +52,13 @@ class LoginPage extends StatelessWidget {
               ButtonWidget(
                 text: 'Login',
                 onTap: () {
-                  _controller.onTapButtonLogin(context);
+                  controller.onTapButtonLogin(context);
                 },
               ),
               ButtonWidget(
                 text: 'Registrar',
                 onTap: () {
-                  _controller.onTapButtonRegister(context);
+                  controller.onTapButtonRegister(context);
                 },
               ),
             ],

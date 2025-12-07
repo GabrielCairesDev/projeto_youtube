@@ -3,10 +3,27 @@ import 'package:projeto_youtube/features/home/controller/home.controller.dart';
 import 'package:projeto_youtube/shared/widgets/button.widget.dart';
 import 'package:projeto_youtube/shared/widgets/scaffold.widget.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-  final _controller = HomeController();
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late final HomeController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = HomeController();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +33,7 @@ class HomePage extends StatelessWidget {
         child: ButtonWidget(
           text: 'Logout',
           onTap: () {
-            _controller.onTapButtonLogout(context);
+            controller.onTapButtonLogout(context);
           },
         ),
       ),
