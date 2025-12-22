@@ -1,22 +1,17 @@
-// Importa o pacote base do Flutter que contém os
-// widgets visuais (botões, textos, colunas, linhas, etc.)
-// e o sistema de design Material (padrão do Android).
 import 'package:flutter/material.dart';
-
-// Importa o arquivo onde está definida a classe MyApp,
-// que será o widget principal do aplicativo.
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:projeto_youtube/core/config/app.config.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-// Esta é a função principal do programa. Todo app
-// em Dart/Flutter começa executando a função main().
-void main() {
-  // runApp é a função que inicializa o Flutter e exibe
-  // o primeiro widget do app na tela. Aqui estamos passando
-  // o MyApp, que é o widget raiz (o "app em si").
-  //
-  // O "const" indica que esse widget é imutável, ou seja,
-  // não muda depois de criado — isso ajuda na performance.
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_API_KEY']!,
+  );
+
   runApp(const AppConfig());
 }
-
-// update 2.0

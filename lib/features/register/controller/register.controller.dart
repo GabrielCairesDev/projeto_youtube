@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_youtube/core/auth/auth.repository.dart';
 import 'package:projeto_youtube/shared/models/result.model.dart';
 
 class RegisterController extends ChangeNotifier {
@@ -17,23 +18,16 @@ class RegisterController extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    await Future.delayed(Duration(seconds: 2));
-
     late ResultModel result;
 
-    debugPrint('---> Clicou no botão registrar');
-    debugPrint('---> email: ${emailController.text}');
-    debugPrint('---> senha: ${passController.text}');
-    debugPrint('---> senha 2: ${confirmPassController.text}');
-
-    if (emailController.text.isEmpty ||
-        passController.text.isEmpty ||
-        confirmPassController.text.isEmpty) {
-      result = ResultModel(false, 'Por favor, preencha todos os campos.');
-    } else if (passController.text != confirmPassController.text) {
-      result = ResultModel(false, 'As senhas não coincidem.');
-    } else {
+    try {
+      await AuthRepository.instance.register(
+        email: emailController.text.trim(),
+        password: passController.text,
+      );
       result = ResultModel(true, 'Registro realizado com sucesso!');
+    } catch (e) {
+      result = ResultModel(false, 'Erro ao registrar: ${e.toString()}');
     }
 
     isLoading = false;

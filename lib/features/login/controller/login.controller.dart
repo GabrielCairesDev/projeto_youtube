@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_youtube/core/auth/auth.repository.dart';
 import 'package:projeto_youtube/core/routes/routes.config.dart';
 import 'package:projeto_youtube/shared/models/result.model.dart';
 
 class LoginController extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
 
-  final emailController = TextEditingController(text: 'gabriel@exemplo.com');
-  final passController = TextEditingController(text: '123456');
+  final emailController = TextEditingController(
+    text: 'gabriel.araujo.caires@gmail.com',
+  );
+  final passController = TextEditingController(text: 'Teste@123');
 
   bool isLoading = false;
 
@@ -17,21 +20,16 @@ class LoginController extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    await Future.delayed(const Duration(seconds: 2));
-
-    debugPrint('clicou no botao de login');
-    debugPrint('E-mail: ${emailController.text}');
-    debugPrint('Senha: ${passController.text}');
-
     late ResultModel result;
 
-    if (emailController.text == 'gabriel@exemplo.com' &&
-        passController.text == '123456') {
-      result = ResultModel(true, 'Login realizado com sucesso');
-      debugPrint('E-mail e senha corretos');
-    } else {
-      debugPrint('E-mail e senha errados');
-      result = ResultModel(false, 'E-mail ou senha incorretos');
+    try {
+      await AuthRepository.instance.login(
+        email: emailController.text.trim(),
+        password: passController.text,
+      );
+      result = ResultModel(true, 'Login realizado com sucesso!');
+    } catch (e) {
+      result = ResultModel(false, 'Erro ao fazer login: ${e.toString()}');
     }
 
     isLoading = false;
