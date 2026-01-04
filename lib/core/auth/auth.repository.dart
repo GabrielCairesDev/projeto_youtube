@@ -7,13 +7,16 @@ class AuthRepository {
 
   static AuthRepository get instance => _instance;
 
+  static bool get isAuthenticated =>
+      Supabase.instance.client.auth.currentUser != null;
+
   final SupabaseClient _client = Supabase.instance.client;
 
   Future<void> register({
     required String email,
     required String password,
   }) async {
-    await _client.auth.signUp(email: email, password: password,);
+    await _client.auth.signUp(email: email, password: password);
   }
 
   Future<void> login({required String email, required String password}) async {
