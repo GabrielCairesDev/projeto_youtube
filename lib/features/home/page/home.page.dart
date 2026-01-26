@@ -40,7 +40,12 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               spacing: 16,
               children: [
-                CardWidget(onTap: () {}, title: 'Renderizar imagens'),
+                CardWidget(
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesConfig.images);
+                  },
+                  title: 'Renderizar imagens',
+                ),
 
                 ButtonWidget(
                   text: 'Logout',
