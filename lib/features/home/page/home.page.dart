@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_youtube/core/routes/routes.config.dart';
 import 'package:projeto_youtube/features/home/controller/home.controller.dart';
 import 'package:projeto_youtube/shared/widgets/button.widget.dart';
+import 'package:projeto_youtube/shared/widgets/card.widget.dart';
 import 'package:projeto_youtube/shared/widgets/scaffold.widget.dart';
 import 'package:projeto_youtube/shared/widgets/snack_bar.widget.dart';
 
@@ -36,17 +37,27 @@ class _HomePageState extends State<HomePage> {
           title: 'Home',
           isLoading: controller.isLoading,
           body: Center(
-            child: ButtonWidget(
-              text: 'Logout',
-              onTap: () async {
-                final result = await controller.onTapButtonLogout();
+            child: Column(
+              spacing: 16,
+              children: [
+                CardWidget(onTap: () {}, title: 'Renderizar imagens'),
 
-                SnackBarWidget.show(context, result: result);
+                ButtonWidget(
+                  text: 'Logout',
+                  onTap: () async {
+                    final result = await controller.onTapButtonLogout();
 
-                if (result.success) {
-                  Navigator.pushReplacementNamed(context, RoutesConfig.login);
-                }
-              },
+                    SnackBarWidget.show(context, result: result);
+
+                    if (result.success) {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        RoutesConfig.login,
+                      );
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         );
