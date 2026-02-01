@@ -11,7 +11,7 @@ class ImageCacheWidget extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl,
       placeholder: (context, url) => _Loading(),
-      errorWidget: (context, url, error) => _Erro(),
+      errorWidget: (context, url, error) => _Erro(), //
     );
   }
 }
